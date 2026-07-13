@@ -11,7 +11,7 @@
 
     <a href="{{ route('admin.events.create') }}"
        class="btn btn-primary">
-        + Tambah Event
+        Tambah Event
     </a>
 </div>
 

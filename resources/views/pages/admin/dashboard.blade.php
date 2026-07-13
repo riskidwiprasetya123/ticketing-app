@@ -4,15 +4,26 @@
 
 @section('content')
 
-    <div class="container mx-auto p-10">
-        <div class="flex">
-            <h1 class="text-3xl font-semibold mb-4">Manajemen Kategori</h1>
-            <button class="btn btn-primary ml-auto" onclick="add_modal.showModal()">Tambah Kategori</button>
+        <div class="flex justify-between items-center mb-6">
+
+            <h2 class="text-3xl font-bold text-gray-800">
+                Manajemen Kategori
+            </h2>
+
+            <button
+                class="btn btn-primary"
+                onclick="add_modal.showModal()">
+
+                Tambah Kategori
+
+            </button>
+
         </div>
-        <div class="overflow-x-auto rounded-box bg-white p-5 shadow-xs">
-            <table class="table">
+
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="table w-full">
                 <!-- head -->
-                <thead>
+                <thead class="bg-gray-100">
                     <tr>
                         <th>No</th>
                         <th class="w-3/4">Nama Kategori</th>
