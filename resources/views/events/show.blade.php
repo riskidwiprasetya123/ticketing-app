@@ -96,7 +96,19 @@
                                         @endif
                                     </div>
 
-                                    @if ($tiket->stok !== null && $tiket->stok <= 0)
+                                    @php
+                                        $tanggalEvent = $event->tanggal_waktu
+                                            ? \Carbon\Carbon::parse($event->tanggal_waktu)
+                                            : \Carbon\Carbon::parse($event->tanggal);
+                                    @endphp
+
+                                    @if($tanggalEvent->isPast())
+
+                                        <button class="btn btn-error w-full" disabled>
+                                            Event Berakhir
+                                        </button>
+
+                                    @elseif ($tiket->stok !== null && $tiket->stok <= 0)
 
                                         <button class="btn btn-disabled w-full" disabled>
                                             Habis Terjual
@@ -106,9 +118,7 @@
 
                                         <a href="{{ route('orders.checkout', $event) }}"
                                         class="btn btn-primary w-full">
-
                                             Beli Sekarang
-
                                         </a>
 
                                     @endif

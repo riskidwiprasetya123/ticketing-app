@@ -54,7 +54,8 @@
                                         min="0"
                                         max="{{ $tiket->stok }}"
                                         value="0"
-                                        class="input input-bordered w-24">
+                                        class="input input-bordered w-24 jumlah-tiket"
+                                        data-harga="{{ $tiket->harga }}">
 
                                 </div>
 
@@ -63,6 +64,18 @@
                         </div>
 
                     @endforeach
+
+                    <div class="border rounded-lg p-5 mb-5 bg-base-200">
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-semibold">
+                                Total Pembayaran
+                            </span>
+
+                            <span id="totalHarga" class="text-xl font-bold text-primary">
+                                Rp 0
+                            </span>
+                        </div>
+                    </div>
 
                     <button
                         type="submit"
@@ -73,6 +86,38 @@
                     </button>
 
                 </form>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+
+                        const inputs = document.querySelectorAll('.jumlah-tiket');
+                        const totalHarga = document.getElementById('totalHarga');
+
+                        function hitungTotal() {
+
+                            let total = 0;
+
+                            inputs.forEach(input => {
+
+                                const harga = parseInt(input.dataset.harga);
+                                const jumlah = parseInt(input.value) || 0;
+
+                                total += harga * jumlah;
+
+                            });
+
+                            totalHarga.innerHTML =
+                                'Rp ' + total.toLocaleString('id-ID');
+                        }
+
+                        inputs.forEach(input => {
+                            input.addEventListener('input', hitungTotal);
+                        });
+
+                        hitungTotal();
+
+                    });
+                    </script>
 
             </div>
 
