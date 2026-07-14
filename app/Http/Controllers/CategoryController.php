@@ -7,9 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Store a newly created category in storage.
-     */
+    public function index()
+    {
+        $categories = Kategori::all();
+
+        return view('pages.admin.categories.index', compact('categories'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -20,7 +24,7 @@ class CategoryController extends Controller
             'nama' => $request->nama,
         ]);
 
-        return redirect()->route('dashboard')
+        return redirect()->route('categories.index')
             ->with('success', 'Kategori berhasil ditambahkan!');
     }
 
@@ -38,7 +42,7 @@ class CategoryController extends Controller
             'nama' => $request->nama,
         ]);
 
-        return redirect()->route('dashboard')
+        return redirect()->route('categories.index')
             ->with('success', 'Kategori berhasil diperbarui!');
     }
 
@@ -50,7 +54,7 @@ class CategoryController extends Controller
         $category = Kategori::findOrFail($id);
         $category->delete();
 
-        return redirect()->route('dashboard')
+        return redirect()->route('categories.index')
             ->with('success', 'Kategori berhasil dihapus!');
     }
 }
